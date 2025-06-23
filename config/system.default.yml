@@ -1,0 +1,34 @@
+# ==============================================================================
+# TrackieLLM - System-Wide Configuration (system.default.yml)
+# ==============================================================================
+#
+# This file defines global settings for the application's software behavior,
+# independent of specific hardware or user profiles.
+#
+
+# --- Logging Configuration ---
+# Defines the verbosity of the application's console output.
+# Valid options are: "DEBUG", "INFO", "WARN", "ERROR".
+# - DEBUG: Most verbose, for development.
+# - INFO: Standard operational messages (default for production).
+# - WARN: Only warnings and errors.
+# - ERROR: Only critical errors.
+log-level: "INFO"
+
+
+# --- System Resource Allocation ---
+# Defines how many CPU threads to allocate to each major subsystem.
+# This is critical for balancing performance on multi-core processors.
+threads:
+  # Number of threads for the perception pipeline (ONNX Runtime).
+  # On a 4-core CPU, 1 or 2 is a good starting point.
+  perception: 2
+
+  # Number of threads for the reasoning module (llama.cpp).
+  # LLM inference scales well with more threads. On a 4-core CPU,
+  # allocating all 4 can speed up response generation significantly.
+  reasoning: 4
+
+  # Number of threads for the audio processing module.
+  # Audio processing is typically lightweight. 1 thread is usually sufficient.
+  audio: 1
