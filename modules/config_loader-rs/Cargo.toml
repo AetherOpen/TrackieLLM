@@ -1,0 +1,49 @@
+# ==============================================================================
+# Cargo.toml for the `config_loader-rs` Crate
+# ==============================================================================
+#
+# This file defines the metadata and dependencies for the Rust-based
+# configuration loader module.
+#
+
+[package]
+name = "via_config"
+version = "0.1.0"
+edition = "2021"
+authors = ["TrackieLLM Engineering Team <contact@trackiellm.dev>"]
+description = "A safe, C-compatible configuration loader for the TrackieLLM project."
+
+# --- Crate Dependencies ---
+# These are the libraries our Rust code needs to function.
+[dependencies]
+# `serde` is the framework for serializing and deserializing Rust data structures.
+serde = { version = "1.0", features = ["derive"] }
+
+# `serde_yaml` provides the specific logic for parsing YAML files.
+serde_yaml = "0.9"
+
+# `libc` provides C-compatible types like `c_char`.
+libc = "0.2"
+
+# --- Build-Time Dependencies ---
+# These dependencies are only needed for the `build.rs` script, not for the
+# final compiled library.
+[build-dependencies]
+# `cbindgen` is the tool we use in `build.rs` to automatically generate
+# the C header file from our Rust code.
+cbindgen = "0.26"
+
+# --- Library Configuration ---
+# This section is critical. It tells Cargo what kind of library to build.
+[lib]
+# The name of the final output file (e.g., `libvia_config.a`).
+name = "via_config"
+
+# We specify `staticlib` to produce a `.a` file (on Linux/macOS) or a `.lib`
+# file (on Windows) that can be statically linked into the main C++ executable.
+# This creates a self-contained binary with no external Rust runtime dependencies.
+#
+# We also include `cdylib` (C Dynamic Library) as an option. This can be useful
+# for certain build systems or for creating a shared object (`.so`/`.dll`).
+# The final choice of which to link against is made by the CMake build system.
+crate-type = ["staticlib", "cdylib"]
