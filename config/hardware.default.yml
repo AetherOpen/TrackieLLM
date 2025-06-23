@@ -1,0 +1,68 @@
+# ==============================================================================
+# TrackieLLM - Hardware Configuration (hardware.default.yml)
+# ==============================================================================
+#
+# This file defines the parameters specific to the hardware setup.
+# It allows the software to be independent of the specific devices used.
+#
+
+# --- Camera Hardware Settings ---
+camera:
+  # The system ID of the camera device.
+  # On Linux, this is typically the number in /dev/video[X] (e.g., 0).
+  # On Windows, this is the index of the camera device (0 for the first one).
+  device-id: 0
+
+  # The desired resolution for camera capture. The HAL will try to match this
+  # or select the closest supported resolution.
+  resolution:
+    width: 640
+    height: 480
+
+# --- Microphone Hardware Settings ---
+microphone:
+  # The system ID of the audio capture device.
+  # Use -1 to let the HAL select the system's default device.
+  device-id: -1
+
+  # Sample rate for audio capture. 16000 Hz is standard for speech recognition.
+  sample-rate: 16000
+
+  # Configuration for the real-time audio noise filter.
+  # This can be a simple moving average or a more complex filter.
+  noise-filter:
+    enabled: true
+    # The number of samples to average. A larger window provides more smoothing
+    # but introduces more latency. 3-5 is a reasonable range.
+    window-size: 3
+
+# --- Perception Module Hardware-Related Settings ---
+perception:
+  # Paths to the machine learning models. These paths are relative to the
+  # application's working directory or can be absolute.
+  model-paths:
+    # Model for general object detection.
+    object-detector: "assets/models/yolo_v8n.onnx"
+    # Model for single-image depth estimation.
+    depth-estimator: "assets/models/midas_v2_small.onnx"
+    # Model for extracting facial features (embeddings).
+    face-embedder: "assets/models/mobilefacenet.onnx"
+
+  # Confidence thresholds for the perception models.
+  # Detections with a score below these values will be ignored.
+  thresholds:
+    # Minimum confidence for an object to be considered detected.
+    detection: 0.55
+    # Minimum confidence for a face match to be considered a recognition.
+    recognition: 0.75
+
+# --- Reasoning Module Hardware-Related Settings ---
+reasoning:
+  llm:
+    # Path to the GGUF-formatted language model file.
+    model-path: "assets/models/gemma-2b-it.gguf"
+
+    # The context size (in tokens) for the LLM. This determines how much
+    # of the conversation history the model can "remember".
+    # A larger value requires more RAM. 2048 is a safe default for embedded.
+    context-size: 2048
