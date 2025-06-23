@@ -1,0 +1,54 @@
+# ==============================================================================
+# Python Dependencies for TrackieLLM ATAD Scripts
+# ==============================================================================
+#
+# This file lists all the Python packages required to run the scripts in the
+# `scripts/training/` directory, such as `train.py`.
+#
+# These dependencies are for development and model personalization tasks and
+# are NOT required on the target embedded device (Raspberry Pi).
+#
+# To install all dependencies, run:
+#   pip install -r requirements.txt
+#
+
+# --- Core Dependencies for Face Processing ---
+
+# For running ONNX models (face detection and embedding).
+onnxruntime
+
+# For image and video processing (webcam capture, resizing, etc.).
+opencv-python
+
+# Fundamental library for numerical operations (embeddings, etc.).
+numpy
+
+# For displaying progress bars during data collection.
+tqdm
+
+
+# --- Core Dependencies for LLM Fine-Tuning ---
+
+# The main deep learning framework. A specific version with CUDA might be
+# needed for GPU acceleration (e.g., torch==2.1.0+cu118).
+torch
+
+# Hugging Face's library for downloading and using pre-trained models.
+transformers
+
+# Hugging Face's library for Parameter-Efficient Fine-Tuning (PEFT), like LoRA.
+peft
+
+# Hugging Face's library to simplify training on different hardware setups.
+accelerate
+
+# For loading models with 8-bit and 4-bit quantization, saving memory.
+bitsandbytes
+
+# Hugging Face's library for easily handling and processing datasets.
+datasets
+
+# For parsing command-line arguments in train.py.
+# Note: argparse is part of the standard library in Python 3, but listing it
+# here can be useful for older environments or for clarity.
+argparse
