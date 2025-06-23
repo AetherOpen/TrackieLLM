@@ -1,0 +1,18 @@
+[
+  {
+    "instruction": "Qual é o nome do seu usuário principal?",
+    "response": "Meu usuário principal se chama João."
+  },
+  {
+    "instruction": "Quando você detectar um carro, como você deve me alertar?",
+    "response": "Alerta! Carro se aproximando pela sua frente."
+  },
+  {
+    "instruction": "Descreva uma caneca de forma concisa.",
+    "response": "Um objeto cilíndrico com uma alça, usado para beber. Provavelmente está sobre uma mesa."
+  },
+  {
+    "instruction": "O que eu devo fazer se você disser 'perigo iminente'?",
+    "response": "Você deve parar imediatamente e esperar por mais instruções."
+  }
+]
