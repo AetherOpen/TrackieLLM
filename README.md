@@ -6,7 +6,7 @@
 | **Modelo de Preço** | Gratuito (App) / Baixo | Moderado (Custo do Hardware) | **Muito Alto** |
 | **Filosofia** | **Código Aberto** | **Código Aberto** | Proprietário |
 | **Necessidade de Conexão** | 🌐 **Sempre Online** | ❌ **100% Offline** | ❌ **100% Offline** |
-| **Nível de Interpretação**| ⭐ **Extremo** (Cloud AI) | ✨ **Ultra** (LLM Embarcado) | 👍 Alto |
+| **Nível de Interpretação**| ⭐ **Extremo** (Cloud AI) | ✨ **Alto** (LLM Embarcado) | 👍 Medio |
 | **Latência / Tempo Real**| ⚡ **Extrema** (API de Streaming) | Rápida (Processamento Local) | Rápida |
 | **Navegação e Distância**| ✅ **Sim** | ✅ **Sim** | ❌ **Não** |
 | **Detecção de Perigos** | ✅ **Sim** (Fogo, Gás, etc.) | ✅ **Sim** (Fogo, Gás, etc.) | ❌ Não |
