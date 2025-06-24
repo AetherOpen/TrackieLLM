@@ -1,6 +1,0 @@
-[submodule "third_party/onnxruntime"]
-	path = third_party/onnxruntime
-	url = https://github.com/microsoft/onnxruntime.git
-[submodule "third_party/llama.cpp"]
-	path = third_party/llama.cpp
-	url = https://github.com/ggerganov/llama.cpp.git

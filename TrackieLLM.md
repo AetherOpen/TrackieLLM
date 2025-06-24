@@ -19,7 +19,7 @@ Este documento detalha a arquitetura de software do TrackieLLM, um assistente in
     │   ├── system.default.yml          # -> Configurações gerais (threads, log level).
     │   ├── hardware.default.yml        # -> Configurações de hardware (resolução da câmera, ID do microfone).
     │   └── profiles/
-    │       └── joao.default.yml        # -> Exemplo de perfil de usuário do ATAD.
+    │       └── default.yml        # -> Exemplo de perfil de usuário do ATAD.
     ├── docs/
     │   ├── Architecture_v2.md          # -> Este documento.
     │   └── C_ABI_Reference.md          # -> Documentação da interface C da HAL e do Config Loader.
