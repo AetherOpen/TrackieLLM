@@ -33,8 +33,8 @@ Esta tabela compara os dispositivos físicos, seus custos, aplicações ideais e
 
 ### App/Chapéis
 
-|       | TrackWay (App) | Trackway (Chapéus)
-| :--- | :---: | :--- | :---: |
+| Comparação | TrackWay (App) | Trackway (Chapéus) |
+| :--- | :---: | :---: | :---: |
 | **Medição aplicada** | Media-Alta (55-75% Preciso) | Alta (75-95% Preciso) |
 | **Deteção de Fogo ou fumaça** | Media-Alta (55-75% Preciso) | Alta (75-95% Preciso) |
 
