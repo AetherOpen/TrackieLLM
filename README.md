@@ -1,21 +1,40 @@
-### Tabela Comparativa: TrackieLLM vs. OrCam MyEye
 
-Aqui está uma tabela que compara as características-chave do seu ecossistema com o OrCam MyEye, destacando os pontos fortes do TrackieLLM.
+### Comparativo de Ecossistemas de Assistência Visual
 
-| Característica | TrackieLLM (Ecossistema) | OrCam MyEye |
-| :--- | :--- | :--- |
-| **Preço** | Gratuito (App) a Moderado (Hardware) | **Muito Alto** (milhares de dólares) |
-| **Modelo de Acesso** | **Código Aberto** e Comunitário | Proprietário e Fechado |
-| **Nível de Interpretação** | **Ultra** (Usa um LLM para descrições ricas e contextuais) | Alto (Lê texto e descreve objetos) |
-| **Mede Distâncias?** | ✅ **Sim** (Usa IA de profundidade + sensores) | ❌ **Não** |
-| **Salva Rostos?** | ✅ **Sim** (Sistema treinável pelo usuário) | ✅ Sim (Até 100 rostos) |
-| **Detecção de Perigos** | ✅ **Sim** (Fogo, fumaça, gás, obstáculos) | ❌ Não (Foco em leitura) |
-| **Funcionamento Offline** | ✅ **Sim** (100% offline no modo independente) | ✅ Sim (para funções básicas) |
-| **Personalização (A.T.A.D)** | ✅ **Sim** (O usuário pode adaptar a IA ao seu estilo) | ❌ Não (Apenas configurações básicas) |
-| **Plataforma** | **Flexível** (App de celular, chapéu acessível ou chapéu independente) | Dispositivo único e dedicado |
-| **Integração com Sensores** | ✅ **Sim** (Ultrassom, IR, Gás, etc. para mais segurança) | ❌ Não |
+| Característica | 🧠 Trackie (Online) | 🏠 Trackie (LLM - Offline) | ⚫ OrCam MyEye |
+| :--- | :---: | :---: | :---: |
+| **Modelo de Preço** | Gratuito (App) / Baixo | Moderado (Custo do Hardware) | **Muito Alto** |
+| **Filosofia** | **Código Aberto** | **Código Aberto** | Proprietário |
+| **Necessidade de Conexão** | 🌐 **Sempre Online** | ❌ **100% Offline** | ❌ **100% Offline** |
+| **Nível de Interpretação**| ⭐ **Extremo** (Cloud AI) | ✨ **Ultra** (LLM Embarcado) | 👍 Alto |
+| **Latência / Tempo Real**| ⚡ **Extrema** (API de Streaming) | Rápida (Processamento Local) | Rápida |
+| **Navegação e Distância**| ✅ **Sim** | ✅ **Sim** | ❌ **Não** |
+| **Detecção de Perigos** | ✅ **Sim** (Fogo, Gás, etc.) | ✅ **Sim** (Fogo, Gás, etc.) | ❌ Não |
+| **Reconhecimento Facial**| ✅ **Sim** | ✅ **Sim** | ✅ Sim |
+| **Personalização (A.T.A.D)** | ✅ **Sim** | ✅ **Sim** | ❌ Não |
+| **Plataforma** | Celular (iOS/Android) | Chapéu Independente | Dispositivo Dedicado |
 
 ---
+
+
+### Comparativo de Plataformas e Aplicação
+
+Esta tabela compara os dispositivos físicos, seus custos, aplicações ideais e modo de funcionamento.
+
+| Característica | 📱 TrackWay (App) | 👒 Trackie SpotWay | 🤖 Trackie RaspWay | ⚫ OrCam MyEye |
+| :--- | :---: | :---: | :---: | :---: |
+| **Preço Estimado** | Gratuito | R$150-200 | R$400-750) | **Muito Alto** |
+| **Aplicação Ideal** | Uso casual, ambientes internos | Segurança com sensores, custo-benefício | **Autonomia e privacidade máximas** | Leitura de texto |
+| **Qualidade da Percepção** | Câmera do Celular | Câmera Padrão + Sensores | Câmera Padrão + Sensores | Câmera Dedicada |
+| **Nível de Funcionamento** | Rodando gratuitamente via mobile | Conectado ao Celular (Bluetooth) | **100% Autônomo** | 100% Autônomo |
+| **Equipamento Necessário**| Apenas o Celular | Chapéu + Celular | Apenas o Chapéu | Apenas o Dispositivo |
+
+
+### TrackWay (App) / Trackway (Chapéus)
+| :--- | :---: |
+| **Medição aplicada** | Media-Alta (55-75% Preciso) | Alta (75-95% Preciso) |
+| **Deteção de Fogo ou fumaça** | Media-Alta (55-75% Preciso) | Alta (75-95% Preciso) |
+
 
 ### O Diferencial do TrackieLLM
 
