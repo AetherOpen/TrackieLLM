@@ -97,7 +97,7 @@ As tabelas abaixo oferecem uma visão geral de como o ecossistema Trackie se pos
 | Capacidade | TrackWay (App) | TrackWay (Chapéus) |
 | :--- | :---: | :---: |
 | **Medição de Distância** | Média-Alta (55-75% Preciso) | Alta (75-95% Preciso) |
-| **Detecção de Fogo/Fumaça** | Média-Alta (55-75% Preciso) | Alta (75-95% Preciso) |
+| **Detecção de Fogo/Fumaça** | Alta (75-90% Preciso) | Alta (+95% Preciso) |
 
 ---
 
