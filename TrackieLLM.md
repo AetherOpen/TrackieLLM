@@ -13,33 +13,34 @@ Este documento detalha a arquitetura de software do TrackieLLM, um assistente in
     │       └── ci_cd.yml               # -> Pipeline unificado para build, teste e deploy.
     |   assets/
     |    └── models/
-    |        ├── 1_perception/
+    |        ├── perception/
     |        │   ├── vision/
     |        │   │   ├── detection/
-    |        │   │   │   ├── yolov8n_640x480.onnx
-    |        │   │   │   └── retinaface_640x480.onnx
+    |        │   │   │   ├── 
+    |        │   │   │   └── 
     |        │   │   ├── depth/
-    |        │   │   │   └── midas_v21_small.onnx
+    |        │   │   │   └── 
     |        │   │   └── recognition/
-    |        │   │       └── mobilefacenet_112x112.onnx
+    |        │   │       └── 
     |        │   └── audio/
     |        │       ├── voice_activity_detection/
-    |        │       │   └── silero_vad.onnx
+    |        │       │   └── 
     |        │       └── speech_to_text/
-    |        │           └── whisper_tiny_en.gguf
+    |        │           └── 
     |        │
-    |        ├── 2_reasoning/
+    |        ├── reasoning/
     |        │   └── language/
-    |        │       ├── gemma-2b-it.Q4_K_M.gguf
-    |        │       └── gemma-2b-it-joao-lora-adapter/  # (Diretório com o adaptador LoRA)
+    |        │       ├── TrackieNeuralMachine.gguf
+    |        │       └── trckllm-adapter/  # (Diretório com o adaptador LoRA)
     |        │           ├── adapter_config.json
     |        │           ├── adapter_model.bin
     |        │           └── ...
     |        │
-    |        └── 3_generation/
-    |            └── audio/
-    |                └── text_to_speech/
-    |                    └── piper_en_us_lessac_medium.onnx
+    |        └── generation/
+    |        |    └── audio/
+    |        |        └── text_to_speech/
+    |        | 
+    |        └── sounds/
     ├── build/                          # -> (Ignorado pelo Git) Diretório de saída dos builds.
     ├── config/
     │   ├── system.default.yml          # -> Configurações gerais (threads, log level).
