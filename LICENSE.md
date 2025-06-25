@@ -1,8 +1,5 @@
 ### **AetherWay AI - End User License Agreement (EULA)**
 
----
-
-### **Part 1: English (Primary Language)**
 
 **AetherWay AI Software License Agreement**
 
