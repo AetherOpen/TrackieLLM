@@ -45,8 +45,7 @@ jobs:
             pkg-config \
             libasound2-dev \
             libv4l-dev \
-            # Ferramentas para compilação cruzada para ARM64
-            gcc-aarch64-linux-gnu \
+            libjpeg-dev \
             g++-aarch64-linux-gnu
 
       # Passo 3: Instala as dependências Python dos scripts
