@@ -88,6 +88,20 @@ jobs:
         with:
           name: trackiellm-os-aarch64
           path: trackiellm-os-*.tar.gz
+          
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git python3 python3-pip cmake pkg-config libasound2-dev libjpeg-dev libv4l-dev
+
+      # ADICIONE ESTE NOVO PASSO AQUI
+      - name: Install ARM64 Cross-Compiler
+        run: sudo apt-get install -y g++-aarch64-linux-gnu
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
 
   # ============================================================================
   # Job 2: Build and Test on Windows
