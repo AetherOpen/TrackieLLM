@@ -1,16 +1,13 @@
 # ==============================================================================
-# GitHub Actions CI/CD Pipeline for TrackieLLM
+# GitHub Actions CI/CD Pipeline para TrackieLLM
 # ==============================================================================
 #
-# This workflow automates the build, test, and release process for the
-# TrackieLLM project.
+# Este workflow automatiza os processos de build, teste e release para o projeto
+# TrackieLLM. Ele é acionado em:
+#   - Pushes para o branch `main` (para integração contínua).
+#   - Pull requests visando o branch `main` (para validação).
+#   - Pushes de tags começando com `v` (para criar releases).
 #
-# It triggers on:
-#   - Pushes to the `main` branch (for continuous integration).
-#   - Pull requests targeting the `main` branch (for validation).
-#   - Pushes of tags starting with `v` (for creating releases).
-#
-
 name: TrackieLLM CI/CD
 
 on:
@@ -22,48 +19,58 @@ on:
 
 jobs:
   # ============================================================================
-  # Job 1: Build and Test on Linux (x86_64 and cross-compile for ARM)
+  # Job 1: Build e Teste no Linux (x86_64 nativo e compilação cruzada para ARM)
   # ============================================================================
   build-linux:
     name: Build & Test (Linux x86_64 + ARM Cross-Compile)
     runs-on: ubuntu-latest
 
     steps:
+      # Passo 1: Faz o checkout do código do repositório, incluindo submódulos
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive' # Important: checkout git submodules like llama.cpp
+          submodules: 'recursive' # Essencial para clonar dependências como llama.cpp
 
+      # Passo 2: Instala todas as dependências do sistema de uma só vez
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            build-essential cmake git python3 python3-pip pkg-config \
-            libasound2-dev libv4l-dev \
-            # For cross-compiling to ARM
-            gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+            build-essential \
+            cmake \
+            git \
+            python3 \
+            python3-pip \
+            pkg-config \
+            libasound2-dev \
+            libv4l-dev \
+            # Ferramentas para compilação cruzada para ARM64
+            gcc-aarch64-linux-gnu \
+            g++-aarch64-linux-gnu
 
+      # Passo 3: Instala as dependências Python dos scripts
       - name: Install Python script dependencies
-        run: python3 -m pip install -r scripts/setup/requirements.txt
+        run: python3 -m pip install -r scripts/training/requirements.txt
 
+      # Passo 4: Baixa os modelos de IA necessários para a aplicação
       - name: Download AI Models
         run: python3 scripts/setup/download_models.py
 
-      - name: Configure CMake (Native x86_64 Build)
-        run: cmake -S . -B build/x86_64 -DCMAKE_BUILD_TYPE=Release
+      # --- Build Nativo (x86_64) ---
+      - name: Configure CMake (Native x86_64)
+        run: cmake -S . -B build/x86_64 -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
 
-      - name: Build (Native x86_64 Build)
+      - name: Build (Native x86_64)
         run: cmake --build build/x86_64 --parallel
 
-      - name: Test (Native x86_64 Build)
+      - name: Test (Native x86_64)
         run: |
           cd build/x86_64
           ctest --output-on-failure
 
+      # --- Compilação Cruzada (ARM64) ---
       - name: Configure CMake (ARM64 Cross-Compile)
-        # We use a CMake toolchain file to specify the cross-compiler.
-        # This file would need to be created in the project.
-        # For this example, we set the variables directly.
         run: >
           cmake -S . -B build/aarch64
           -DCMAKE_BUILD_TYPE=Release
@@ -73,38 +80,23 @@ jobs:
       - name: Build (ARM64 Cross-Compile)
         run: cmake --build build/aarch64 --parallel
 
+      # Passo 5: Empacota a versão para TrackieOS (ARM64)
       - name: Package for TrackieOS (ARM64)
-        # We run the packaging script on the cross-compiled build.
-        # The script needs to be adapted to look in `build/aarch64`.
-        # For simplicity, we'll just run the standard script.
         run: |
-          # Temporarily move the ARM build to the default `build` location
-          # so the packaging script finds it.
-          mv build/aarch64 build
-          ./scripts/deployment/package_os.sh ${{ github.ref_name }}
+          # Executa o script de empacotamento, passando o nome da tag/branch e o diretório do build
+          # NOTA: O script 'package_os.sh' deve ser ajustado para aceitar o diretório de build como segundo argumento.
+          ./scripts/deployment/package_os.sh ${{ github.ref_name }} build/aarch64
 
+      # Passo 6: Faz o upload do artefato do TrackieOS para ser usado no job de release
       - name: Upload TrackieOS Artifact
         uses: actions/upload-artifact@v4
         with:
           name: trackiellm-os-aarch64
           path: trackiellm-os-*.tar.gz
-          
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential git python3 python3-pip cmake pkg-config libasound2-dev libjpeg-dev libv4l-dev
-
-      # ADICIONE ESTE NOVO PASSO AQUI
-      - name: Install ARM64 Cross-Compiler
-        run: sudo apt-get install -y g++-aarch64-linux-gnu
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          submodules: 'recursive'
+          retention-days: 5 # Mantém o artefato por 5 dias
 
   # ============================================================================
-  # Job 2: Build and Test on Windows
+  # Job 2: Build e Teste no Windows (x64)
   # ============================================================================
   build-windows:
     name: Build & Test (Windows x64)
@@ -116,25 +108,25 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
-
+      # O vcpkg é um gerenciador de pacotes C++ da Microsoft que simplifica a aquisição de bibliotecas.
+      # Ele lerá o arquivo 'vcpkg.json' na raiz do seu projeto para instalar as dependências.
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11
         with:
-          vcpkgDirectory: ${{ github.workspace }}/third_party/vcpkg
-          runVcpkgInstall: true # This will install dependencies from vcpkg.json
+          runVcpkgInstall: true
 
       - name: Install Python script dependencies
-        run: python -m pip install -r scripts/setup/requirements.txt
+        run: python -m pip install -r scripts/training/requirements.txt
 
       - name: Download AI Models
         run: python scripts/setup/download_models.py
 
+      # Configura o CMake para usar o toolchain do vcpkg, que localiza as dependências automaticamente.
       - name: Configure CMake
         run: >
           cmake -S . -B build
-          -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/third_party/vcpkg/scripts/buildsystems/vcpkg.cmake
+          -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake
+          -DBUILD_TESTING=ON
 
       - name: Build
         run: cmake --build build --config Release --parallel
@@ -144,38 +136,44 @@ jobs:
           cd build
           ctest --output-on-failure -C Release
 
+      # Empacota a versão para Windows (TrackieStudio)
       - name: Package for TrackieStudio
+        shell: cmd
         run: scripts\deployment\package_studio.bat ${{ github.ref_name }}
 
+      # Faz o upload do artefato do TrackieStudio
       - name: Upload TrackieStudio Artifact
         uses: actions/upload-artifact@v4
         with:
           name: trackiellm-studio-windows-x64
           path: trackiellm-studio-*.zip
+          retention-days: 5
 
   # ============================================================================
-  # Job 3: Create GitHub Release (only runs on new tags)
+  # Job 3: Cria a Release no GitHub (executado apenas ao criar uma nova tag)
   # ============================================================================
   create-release:
     name: Create GitHub Release
-    # This job only runs when a tag is pushed, and it depends on the build jobs.
+    # Condição: só executa se o evento for um push de uma tag no formato 'v*.*.*'
     if: startsWith(github.ref, 'refs/tags/v')
+    # Dependência: precisa que os jobs de build do Linux e Windows terminem com sucesso
     needs: [build-linux, build-windows]
     runs-on: ubuntu-latest
 
     steps:
+      # Passo 1: Baixa todos os artefatos de build dos jobs anteriores
       - name: Download all build artifacts
         uses: actions/download-artifact@v4
         with:
-          path: artifacts/ # Download all artifacts into this directory
+          path: artifacts/ # Baixa todos para uma pasta 'artifacts'
 
+      # Passo 2: Cria a release e anexa os artefatos empacotados
       - name: Create Release and Upload Assets
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
-          # The body of the release notes can be generated automatically
-          # from commit messages, or you can provide a file.
+          # Gera as notas de release automaticamente com base nos commits desde a última tag
           generate_release_notes: true
-          # Upload all files from the artifacts directory.
+          # Anexa os arquivos dos pacotes gerados
           files: |
             artifacts/trackiellm-os-aarch64/*.tar.gz
             artifacts/trackiellm-studio-windows-x64/*.zip
