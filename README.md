@@ -24,7 +24,7 @@ LLM>>
     pytorch
     onnx runtime
 
-Mais detalhamento será descrito em TrackieLLM.md
+    Mais detalhamento será descrito em TrackieLLM.md
 ---
 
 
