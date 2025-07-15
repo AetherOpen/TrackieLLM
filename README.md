@@ -13,6 +13,8 @@ A estrutura de desenvolvimento é obrigatoriamente desenvolvida em c, com pontos
 Assembly > Escrito em padrão ARM, faz pontes e redirecionamentos pro sistema, abre portas e salva ponteiros.
 TrackieOS> Baseado no kernel linux para arm, ocupa de 30-70mb de memória ram.
 
+**TrackieLLM é um projeto muito documentado, varias mudanças e estruturas podem ser vistas nos arquivos md da estrutura base**
+
 Ponto alvo> Orange pi 3-5 < é obrigatório um modelo com pelo menos 8gb de ram, a orange toma vantagem sobre a raspberry pela integração com cuda.
 ---
 
