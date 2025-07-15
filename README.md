@@ -1,4 +1,4 @@
-#Para Clonar Use: 
+**Para Clonar Use: **
 ---
     git clone --recurse-submodules https://github.com/phkaiser13/TrackieLLM.git
     git submodule update --remote
