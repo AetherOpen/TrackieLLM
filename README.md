@@ -1,6 +1,8 @@
-git clone --recurse-submodules https://github.com/AetherOpen/TrackieLLM.git
-git submodule update --remote
-
+use os comandos 
+---
+    git clone --recurse-submodules https://github.com/phkaiser13/TrackieLLM.git
+    git submodule update --remote
+---
 ---
 Justificativa base:
 
