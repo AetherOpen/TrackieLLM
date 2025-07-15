@@ -28,4 +28,4 @@ Mais detalhamento será descrito em TrackieLLM.md
 ---
 
 Under Vytruve Organization License
-LICENSE(LICENSE)
+[LICENSE](LICENSE.md)
