@@ -164,8 +164,3 @@ Dividiremos o trabalho em fases, assim como em um projeto de software real.
     *   **O que fazer:** Testar e refinar os scripts `package_os.sh` e `package_studio.bat`. Criar um pacote `.tar.gz` e um `.zip` e tentar executá-los em uma máquina limpa.
     *   **Entregável:** Pacotes de implantação que funcionam "out-of-the-box".
 
-4.  **Documentação Final:**
-    *   **O que fazer:** Escrever o `README.md` principal com instruções claras de compilação e execução para um novo desenvolvedor.
-    *   **Entregável:** Documentação que permite que outra pessoa contribua ou use o projeto.
-
-Este plano de ação transforma o design em um roteiro de desenvolvimento iterativo e profissional. Cada fase tem um objetivo claro e produz um resultado tangível. Comecemos pela Fase 0.
