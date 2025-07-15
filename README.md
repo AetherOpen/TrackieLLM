@@ -27,5 +27,4 @@ LLM>>
 Mais detalhamento será descrito em TrackieLLM.md
 ---
 
-Under Vytruve Organization License
-[LICENSE](LICENSE.md)
+Under Vytruve Organization [LICENSE](LICENSE.md)
